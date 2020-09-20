@@ -1,0 +1,22 @@
+{
+  "name": "moonbot",
+  "version": "1.0.0",
+  "description": "Drama Queen Server Experimental Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamedst/moonbot.git"
+  },
+  "author": "Traore Mohamed Seydou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mohamedst/moonbot/issues"
+  },
+  "homepage": "https://github.com/mohamedst/moonbot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
