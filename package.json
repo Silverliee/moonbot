@@ -4,6 +4,8 @@
   "description": "Drama Queen Server Experimental Bot",
   "main": "index.js",
   "scripts": {
+    "dev_start": "nodemon index.js",
+    "install_dep": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +20,10 @@
   "homepage": "https://github.com/mohamedst/moonbot#readme",
   "dependencies": {
     "discord.js": "^12.3.1",
-    "dotenv": "^8.2.0",
-    "nodemon": "^2.0.4"
+    "mongoose": "^5.12.11",
+    "rss-parser": "^3.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
