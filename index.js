@@ -42,7 +42,6 @@ client.on("message", (message) => {
 					for(let i = 0; i < responses.length; i++) {
 						message.channel.send(responses[i]).then();
 					}
-					console.log("OUAIS ÇA PASSE");
 					setTimeout(() => fetchFeed(delay), delay);
 				}
 				fetchFeed(30000).then();
