@@ -57,27 +57,27 @@ async function feedAction() {
 	for(let i = 0; i < followedSubReddit.length; i++) {
 		let feed = await parser.parseURL(followedSubReddit[i].rss_url);
 
-		if(lastPostsHistoriser.length === 0) {
+		if(lastPostsHistoriser.length === 1) {
 			lastPostsHistoriser.push({
 					rssUrl: followedSubReddit[i].rss_url,
-					lastPostUrl: feed.items[0]
+					lastPostUrl: feed.items[1]
 				});
-			response.push(feed.items[0].link);
+			response.push(feed.items[1].link);
 		} else if(lastPostsHistoriser.some(element => element.rssUrl === followedSubReddit[i].rss_url)) {
 			let objectIndex = lastPostsHistoriser.findIndex((object => object.rssUrl === followedSubReddit[i].rss_url));
-			if(lastPostsHistoriser[objectIndex].lastPostUrl !== feed.items[0].link) {
+			if(lastPostsHistoriser[objectIndex].lastPostUrl !== feed.items[1].link) {
 				lastPostsHistoriser[objectIndex] = {
 					rssUrl: followedSubReddit[i].rss_url,
-					lastPostUrl: feed.items[0].link
+					lastPostUrl: feed.items[1].link
 				};
-				response.push(feed.items[0].link);
+				response.push(feed.items[1].link);
 			}
 		} else {
 			lastPostsHistoriser.push({
 				rssUrl: followedSubReddit[i].rss_url,
-				lastPostUrl: feed.items[0]
+				lastPostUrl: feed.items[1]
 			});
-			response.push(feed.items[0].link);
+			response.push(feed.items[1].link);
 		}
 	}
 	return response;
