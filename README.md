@@ -1,6 +1,6 @@
 # moonbot
-Drama Quee Serveur Experimental Bot.
+Personnal discord serveur Bot.
 
 Develop by me for me and my friends,
 
-List of commands :
+List of commands : #coming soon#
