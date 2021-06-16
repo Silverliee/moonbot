@@ -13,7 +13,7 @@
   •
   <a href="#installation">Installation</a>
   •
-  <a href="http://red-discordbot.readthedocs.io/en/stable/index.html">Documentation</a>
+  <a href="#">Documentation</a>
   •
   <a href="#Commands">Commands</a>
   •
