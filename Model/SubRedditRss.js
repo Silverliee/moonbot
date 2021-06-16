@@ -6,4 +6,4 @@ const subRedditRss = new Schema({
 	}
 )
 
-module.exports = mongoose.model('SubRedditRss',subRedditRss);
+module.exports = mongoose.model('SubRedditRss', subRedditRss);
