@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/Silverliee/moonbot/"><img src="https://github.com/Silverliee/moonbot/blob/master/Image/moonBotDocumentationImage.png" alt="moonBot"></a>
+  <a href="https://github.com/Silverliee/moonbot/"><img src="https://github.com/Silverliee/moonbot/blob/master/Image/moonBotDocumentationImg.png" alt="moonBot"></a>
   <br>
   Moon Bot
   <br>
