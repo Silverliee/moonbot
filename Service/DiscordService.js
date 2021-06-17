@@ -1,5 +1,6 @@
 const config = require('../config.json');
 const discord = require("discord.js");
+const {twitch} = require("../Command/TwitchCommands");
 const client = new discord.Client();
 const {ping} = require("../Command/PingCommands");
 const {reddit} = require("../Command/RedditCommands");
@@ -19,10 +20,13 @@ function launchDiscordClient() {
 		const command = args.shift().toLowerCase();
 
 		if(command === "ping") {
-			ping();
+			ping(message);
 		}
 		if(command === "reddit") {
-			reddit();
+			reddit(message,args);
+		}
+		if(command === "twitch") {
+			twitch(message,args);
 		}
 
 	});
