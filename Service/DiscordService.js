@@ -1,8 +1,9 @@
 const config = require('../config.json');
 const discord = require("discord.js");
 const client = new discord.Client();
-const {ping} = require("../Command/PingCommands");
-const {reddit} = require("../Command/RedditCommands");
+const pingCommands = require("../Command/PingCommands")();
+const redditCommands = require("../Command/RedditCommands")();
+const twitchCommands = require("../Command/TwitchCommands")();
 const botPrefix = ".";
 
 function launchDiscordClient() {
@@ -19,10 +20,13 @@ function launchDiscordClient() {
 		const command = args.shift().toLowerCase();
 
 		if(command === "ping") {
-			ping();
+			pingCommands.handle(message);
 		}
 		if(command === "reddit") {
-			reddit();
+			redditCommands.handle(message,args);
+		}
+		if(command === "twitch") {
+			twitchCommands.handle(message,args);
 		}
 
 	});
