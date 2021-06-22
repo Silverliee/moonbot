@@ -1,0 +1,36 @@
+name: Deploy Moon on vps
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+   
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Update remote repository
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+        with:
+          source: "."
+          target: "/root/microservices/moonbot/moonbot"
+
+      # Runs a set of commands using the runners shell
+      - name: Update moon docker image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+          run: git pull origin master && docker rm -f moonbot || true && docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}") && docker build . -t silverliee/moonbot && docker run -p 8081:8081 silverliee/moonbot
+            
+            
