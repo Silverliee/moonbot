@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  # Triggers the workflow on push but only for the master branch
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+   
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Deploy code on the personal vps
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+        with:
+          source: "."
+          target: "/root/microservices/moonbot/moonbot"
+
+      - name: Executing remote command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+          script: 
+            git pull origin master
+            docker rm -f moonbot || true
+            docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}")
+            docker build . -t silverliee/moonbot
+            docker run -p 8081:8081 silverliee/moonbot
+            
+            
+            
