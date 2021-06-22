@@ -4,6 +4,7 @@ const config = require('../config.json');
 const authProvider = new ClientCredentialsAuthProvider(config.TWITCH_CLIENT_ID, config.TWITCH_CLIENT_SECRET);
 const apiClient = new ApiClient({authProvider});
 const twitchRepository = require('../Repository/TwitchFollowRepository')();
+const discord = require('discord.js')
 let watchedStreamer = []
 
 class TwitchController {
@@ -22,18 +23,18 @@ class TwitchController {
 			if(watchedStreamer.length === 0) {
 				watchedStreamer.push(followedStreamer[i]);
 				if(isStreamerInLive) {
-					message.channel.send(followedStreamer[i].streamer + " est en live !")
+					message.channel.send(this.liveStreamMessageConstructor(followedStreamer[i].streamer))
 				}
 			} else if(watchedStreamer.some(element => element.streamer === followedStreamer[i].streamer)) {
 				let objectIndex = watchedStreamer.findIndex((object => object.streamer === followedStreamer[i].streamer));
 				if(watchedStreamer[objectIndex].status !== isStreamerInLive) {
 					watchedStreamer[objectIndex].status = isStreamerInLive;
-					message.channel.send(followedStreamer[i].streamer + " est en live !")
+					message.channel.send(this.liveStreamMessageConstructor(followedStreamer[i].streamer))
 				}
 			} else {
 				watchedStreamer.push(followedStreamer[i]);
 				if(isStreamerInLive) {
-					message.channel.send(followedStreamer[i].streamer + " est en live !")
+					message.channel.send(this.liveStreamMessageConstructor(followedStreamer[i].streamer))
 				}
 			}
 		}
@@ -63,6 +64,17 @@ class TwitchController {
 		} else {
 			message.channel.send("Le/La streamer(se) existe déjà dans la liste")
 		}
+	}
+
+	liveStreamMessageConstructor(streamer) {
+		return new discord.MessageEmbed()
+			.setColor('#6441a5')
+			.setTitle(streamer + " en live !")
+			.setURL("https://www.twitch.tv/"+streamer)
+			.setAuthor("MoonBot Twitch Service")
+			.setDescription(streamer+ " est en live sur twitch, tu peux le rejoindre :eyes:")
+			.attachFiles(["../moonbot/Image/twitchLogoPurpleWhite.png"])
+			.setThumbnail('attachment://twitchLogoPurpleWhite.png')
 	}
 }
 
