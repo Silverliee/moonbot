@@ -34,8 +34,8 @@ jobs:
             cd microservices/moonbot
             docker rm -f moonbot || true 
             docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}")
-            docker build . -t silverliee/moonbot
             kill $(lsof -t -i:8081)
+            docker build . -t silverliee/moonbot
             docker run --name moonbot -p 8081:8081 silverliee/moonbot
             
             
