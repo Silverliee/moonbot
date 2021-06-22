@@ -37,6 +37,6 @@ jobs:
             docker rm -f moonbot || true 
             docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}")
             docker build . -t silverliee/moonbot
-            docker run -p 8081:8081 silverliee/moonbot
+            docker run -p 8081:8081 -name moonbot silverliee/moonbot
             
             
