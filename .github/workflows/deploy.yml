@@ -31,12 +31,10 @@ jobs:
           PORT: ${{ secrets.PORT }}
           password: ${{ secrets.PASS }}
           script: |
-            cd microservices/moonbot/moonbot
-            git pull origin master
-            cd ..
+            cd microservices/moonbot
             docker rm -f moonbot || true 
             docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}")
             docker build . -t silverliee/moonbot
-            docker run -p 8081:8081 -name moonbot silverliee/moonbot
+            docker run --name moonbot -p 8081:8081 silverliee/moonbot
             
             
