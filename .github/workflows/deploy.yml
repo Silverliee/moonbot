@@ -19,6 +19,7 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
+          passphrase: ${{ secrets.PASS }}
         with:
           source: "."
           target: "/root/microservices/moonbot/moonbot"
@@ -31,6 +32,7 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
-          run: git pull origin master && docker rm -f moonbot || true && docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}") && docker build . -t silverliee/moonbot && docker run -p 8081:8081 silverliee/moonbot
+          passphrase: ${{ secrets.PASS }}
+          script: git pull origin master && docker rm -f moonbot || true && docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}") && docker build . -t silverliee/moonbot && docker run -p 8081:8081 silverliee/moonbot
             
             
