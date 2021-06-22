@@ -1,13 +1,27 @@
-const {stream} = require("../Controller/TwitchController");
+const twitch = require("../Controller/TwitchController")();
 
-function twitch(message, commandArguments) {
-	switch(commandArguments[0]) {
-		case "stream":
-			stream(message,commandArguments[1]);
-			break;
-		default:
-			break;
+class TwitchCommands {
+	constructor() {
+	}
+
+	handle(message, commandArguments) {
+		switch(commandArguments[0]) {
+			case "stream":
+				(async() => {
+					await twitch.stream(message, commandArguments[1]);
+				})()
+				break;
+			case "follow":
+				(async() => {
+					await twitch.follow(message, commandArguments[1]);
+				})()
+				break
+			default:
+				break;
+		}
 	}
 }
 
-module.exports = {twitch};
+module.exports = () => {
+	return new TwitchCommands();
+};
