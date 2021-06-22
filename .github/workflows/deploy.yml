@@ -17,7 +17,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
+          #port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASS }}
           source: "."
@@ -29,7 +29,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
+          #PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASS }}
           script: git pull origin master && docker rm -f moonbot || true && docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}") && docker build . -t silverliee/moonbot && docker run -p 8081:8081 silverliee/moonbot
