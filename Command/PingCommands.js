@@ -1,5 +1,12 @@
-function ping(message) {
-	message.channel.send("pong!");
+class PingCommands {
+	constructor() {
+	}
+
+	handle(message) {
+		message.channel.send("pong!");
+	}
 }
 
-module.exports = {ping};
+module.exports = () => {
+	return new PingCommands();
+};
