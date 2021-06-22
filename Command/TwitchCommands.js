@@ -6,6 +6,11 @@ class TwitchCommands {
 
 	handle(message, commandArguments) {
 		switch(commandArguments[0]) {
+			case "watch":
+				(async() => {
+					await this.watch(message,3000).then()
+				})()
+				break;
 			case "stream":
 				(async() => {
 					await twitch.stream(message, commandArguments[1]);
@@ -19,6 +24,11 @@ class TwitchCommands {
 			default:
 				break;
 		}
+	}
+
+	async watch(message,delay) {
+		await twitch.twitchStreamsWatcher(message);
+		setTimeout(() => this.watch(message,delay),delay);
 	}
 }
 
