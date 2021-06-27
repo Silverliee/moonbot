@@ -7,7 +7,7 @@ COPY package.json /moonbot
 #Run npm install
 RUN npm install
 
-COPY ../moonbot /moonbot
+COPY /moonbot ../moonbot
 CMD node index.js
 EXPOSE 8080
 #docker build . -t silverliee/moonbot
