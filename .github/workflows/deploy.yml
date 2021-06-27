@@ -20,7 +20,7 @@ jobs:
           port: ${{ secrets.PORT }}
           password: ${{ secrets.PASS }}
           source: "."
-          target: "/root/microservices/moonbot/moonbot"
+          target: "/home/silver/projects/moonbot/moonbot"
 
       # Runs a set of commands using the runners shell
       - name: Update moon docker image
@@ -31,7 +31,7 @@ jobs:
           PORT: ${{ secrets.PORT }}
           password: ${{ secrets.PASS }}
           script: |
-            cd microservices/moonbot
+            cd /home/silver/projects/moonbot
             docker rm -f moonbot || true 
             docker rmi $(docker images --filter=reference='silverliee/moonbot' --format "{{.ID}}")
             docker build . -t silverliee/moonbot
