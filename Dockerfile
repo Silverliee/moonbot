@@ -3,7 +3,7 @@ FROM node:14
 #App workspace
 WORKDIR /moonbot
 #Copy package json in the container
-COPY ../package.json /moonbot
+COPY package.json /moonbot
 #Run npm install
 RUN npm install
 
